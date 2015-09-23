@@ -2,7 +2,9 @@ void Extra() {
   counterTempoExtra = millis();
 
   String input[] = loadStrings("links_Extra.txt");
+  if ( fim == 0 ) {
   fim = input.length;
+  }
   comeco = 0;
   // fim = 1;
   // comeco = 295;
@@ -16,7 +18,7 @@ void Extra() {
 
   for ( int k = comeco; k < fim; k++ ) {
     int qtyPages = 1;
-    String partialAddress = input[k].substring(0, input[k].indexOf(",")) + "?sort=&rows=12&q=&offset=";
+    String partialAddress = input[k].substring(0, input[k].indexOf(",")) + "?sort=&rows=36&q=&offset=";
     String category = input[k].substring(input[k].indexOf("/", 53) + 1, input[k].indexOf(",")).toLowerCase();
 
     print("_/,,/  : " + k + "/" + fim + " - " + category);
@@ -33,7 +35,7 @@ void Extra() {
 
       String fullAddress = partialAddress;
       if ( j >= 2 ) {
-        fullAddress = partialAddress + (j-1)*12;
+        fullAddress = partialAddress + (j-1)*36;
       }
 
       lines = loadStrings(fullAddress);
@@ -42,7 +44,7 @@ void Extra() {
 
 
         if ( match(lines[i], "Produtos encontrados:") != null) {
-          qtyPages = 1 + ((Integer.parseInt(trim(lines[i].substring(lines[i].indexOf("<span>") + 6, lines[i].indexOf("</span>")))))/12);
+          qtyPages = 1 + ((Integer.parseInt(trim(lines[i].substring(lines[i].indexOf("<span>") + 6, lines[i].indexOf("</span>")))))/36);
         }
         //LINK DA FOTO
         if ( match(lines[i], "prdImagem") != null) {
