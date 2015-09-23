@@ -158,9 +158,8 @@ void BD_ZonaSul() {
           prod.name = input2[i].substring(0, input2[i].indexOf(",")).toLowerCase(); // separa nome do produto
           input2[i] = input2[i].substring(input2[i].indexOf(",") + 1, input2[i].length()); //retira o nome do input
           if ( input2[i].indexOf(",", input2[i].indexOf(",") + 1) != -1 ) {
-            println("achou");
-            prod.price = properFloat(input2[i].substring(0, input2[i].indexOf(",", input2[i].indexOf(",") + 1))); //retira o nome do input e sobra o preco
-            prod.deprice = properFloat(input2[i].substring( str(prod.price).length(), input2[i].length()));
+            prod.price = properFloat(trim(input2[i].substring(0, input2[i].indexOf(",", input2[i].indexOf(",") + 1)))); //retira o nome do input e sobra o preco
+            prod.deprice = properFloat(trim(input2[i].substring( nf(prod.price, 1, 2).length()+1, input2[i].length())));
           } else {
             prod.price = properFloat(input2[i].substring(0, input2[i].length())); //retira o nome do input e sobra o preco
           }

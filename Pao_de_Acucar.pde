@@ -80,7 +80,7 @@ void PaoDeAcucar() {
           if ( lines[i-5].indexOf("De:") != -1) {
             lineCrawl += "," + lines[i-5].substring(lines[i-5].indexOf("\"value\">") + 8, lines[i-5].indexOf("</span>", lines[i-5].length()-10));
           }
-          out2put.println(lineCrawl);
+          out2put.print(lineCrawl);
           lineCrawl = "";
         }
       }
@@ -150,8 +150,14 @@ void BD_PaoDeAcucar() {
             input2[i] = input2[i].substring(0, input2[i].indexOf(",")) + "." + input2[i].substring(input2[i].indexOf(",") + 1, input2[i].length());
           }
           prod.name = input2[i].substring(0, input2[i].indexOf(",")).toLowerCase(); // separa nome do produto
-          prod.price = properFloat(input2[i].substring(input2[i].indexOf(",") + 1, input2[i].length())); //retira o nome do input e sobra o preco
-
+          input2[i] = input2[i].substring(input2[i].indexOf(",") + 1, input2[i].length()); //retira o nome do input
+          if ( input2[i].indexOf(",", input2[i].indexOf(",") + 1) != -1 ) {
+            prod.price = properFloat(trim(input2[i].substring(0, input2[i].indexOf(",", input2[i].indexOf(",") + 1)))); //retira o nome do input e sobra o preco
+            prod.deprice = properFloat(trim(input2[i].substring( nf(prod.price, 1, 2).length()+1, input2[i].length())));
+          } else {
+            prod.price = properFloat(input2[i].substring(0, input2[i].length())); //retira o nome do input e sobra o preco
+          }
+          pgsql.query( "INSERT INTO product(name,created_at) SELECT '" + prod.name + "',current_timestamp WHERE NOT EXISTS (SELECT name FROM product WHERE name = '" + prod.name + "') RETURNING id;" );
           pgsql.query( "INSERT INTO product(name,created_at) SELECT '" + prod.name + "',current_timestamp WHERE NOT EXISTS (SELECT name FROM product WHERE name = '" + prod.name + "') RETURNING id;" );
           if ( pgsql.next() )
           {

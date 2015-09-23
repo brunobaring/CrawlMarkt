@@ -28,7 +28,7 @@ void inita() {
     if ( market.equals("wait") )
       wait = Integer.parseInt(action);
     if ( market.equals("waitDB") )
-      wait = Integer.parseInt(action);
+      waitDB = Integer.parseInt(action);
     if ( market.equals("waitBottom") )
       waitBottom = Integer.parseInt(action);    
     if ( market.equals("waitTop") )
