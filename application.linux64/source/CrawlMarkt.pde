@@ -13,7 +13,7 @@ int counterDuplicatasGPA, counterProdutosBancoGPA, counterProdutosCrawlGPA, coun
 int counterDuplicatasExtra, counterProdutosBancoExtra, counterProdutosCrawlExtra, counterTempoExtra = 0;
 PostgreSQL pgsql;
 String user, pass, database, host, path = "";
-int wait, comeco, fim, waitBottom, waitTop = 0;
+int comeco, fim, wait, waitDB, waitBottom, waitTop = 0;
 boolean sendEmail = false;
 String dia, mes, ano = "";
 String refreshtoken = "";

@@ -78,7 +78,7 @@ void ZonaSul() {
           out2put.print(trim(d).toLowerCase() + ",");
         }
         //PRECO
-        if ( lines[i].indexOf("prod_preco rebaixa") != -1 ) {
+        if ( lines[i].indexOf("prod_preco rebaixa") != -1 && lines[i].indexOf("MasterPage") != -1) {
           out2put.print(trim(lines[i+8].substring(lines[i+8].indexOf("R$") + 2, lines[i+8].indexOf("</ins>"))));
           out2put.println(trim("," + lines[i+4].substring(lines[i+4].indexOf("R$") + 2, lines[i+4].indexOf("</del>"))));
         }

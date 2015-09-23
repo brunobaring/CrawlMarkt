@@ -10,7 +10,7 @@ void dropDB() {
     for (int a = 1; a <= maxId; a++) {
       // query the number of entries in table "weather"
       pgsql.query( "drop view prod_id_" + a );
-      wait(20);
+      wait(waitDB);
       println( "drop view prod_id_" + a );
     }
     pgsql.query( "drop trigger minuscula_product_name_on_insert_trigger on product" );
