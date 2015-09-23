@@ -19,14 +19,16 @@ void inita() {
 
     String market = settings[i].substring( 0, settings[i].indexOf("=") );
     String action = settings[i].substring( settings[i].indexOf("=") + 1, settings[i].indexOf(";") );
-    if ( market.equals("wait") )
-      wait = Integer.parseInt(action);
     if ( market.equals("sendEmail") && action.indexOf("y") != -1 )
       sendEmail = true;
     if ( market.equals("comeco") )
       comeco = Integer.parseInt(action);    
     if ( market.equals("fim") )
       fim = Integer.parseInt(action);
+    if ( market.equals("wait") )
+      wait = Integer.parseInt(action);
+    if ( market.equals("waitDB") )
+      wait = Integer.parseInt(action);
     if ( market.equals("waitBottom") )
       waitBottom = Integer.parseInt(action);    
     if ( market.equals("waitTop") )
