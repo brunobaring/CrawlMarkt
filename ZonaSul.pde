@@ -1,6 +1,6 @@
 void ZonaSul() {
   counterTempoZS = millis();
-  
+
   String input[] = loadStrings("links_ZS.txt");
   fim = input.length;
   comeco = 0;
@@ -78,20 +78,13 @@ void ZonaSul() {
           out2put.print(trim(d).toLowerCase() + ",");
         }
         //PRECO
-        if ( match(lines[i], "\"preco\"") != null && match(lines[i-2], "AreaLateral") == null) {
-          int b = lines[i+1].indexOf("R$ ");
-          String c = lines[i+1].substring(b + 3, lines[i+1].indexOf(",", b) + 3);
-          out2put.print(c);
-          if (!c.equals("")) {
-            out2put.println();
-          }
-        } else if ( match(lines[i], "\"preco_por") != null ) {
-          int b = lines[i+2].indexOf("R$ ");
-          String c = lines[i+2].substring(b + 3, lines[i+2].indexOf(",", b) + 3);
-          out2put.print(trim(c));
-          if (!c.equals("")) {
-            out2put.println();
-          }
+        if ( lines[i].indexOf("prod_preco rebaixa") != -1 ) {
+          out2put.print(trim(lines[i+8].substring(lines[i+8].indexOf("R$") + 2, lines[i+8].indexOf("</ins>"))));
+          out2put.println(trim("," + lines[i+4].substring(lines[i+4].indexOf("R$") + 2, lines[i+4].indexOf("</del>"))));
+        }
+
+        if ( lines[i].indexOf("\"preco\">") != -1 && lines[i-2].indexOf("AreaLateral") == -1 ) {
+          out2put.println(trim(lines[i+1].substring(lines[i+1].indexOf("R$") + 2, lines[i+1].indexOf(",") + 3)));
         }
       }
     }

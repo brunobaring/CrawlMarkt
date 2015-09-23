@@ -27,6 +27,7 @@ void PaoDeAcucar() {
       wait(int(random(waitBottom, waitTop)*1000));
       String lines[] = loadStrings(partialAddress+j);
 
+      String lineCrawl = "";
       for ( int i = 0; i < lines.length; i++) {
 
 
@@ -47,7 +48,7 @@ void PaoDeAcucar() {
           int c = lines[i].indexOf("\" class=\"prdImagem img\"");
           if (b != -1 && c != -1) {
             String d = lines[i].substring(b, c);
-            out2put.print(trim(d) + ",");
+            lineCrawl += trim(d) + ",";
           }
         }
 
@@ -69,16 +70,18 @@ void PaoDeAcucar() {
           }
 
           counterProdutosCrawlGPA++;
-          out2put.print(trim(c).toLowerCase() + ",");
+          lineCrawl += trim(c).toLowerCase() + ",";
         }
         //PRECO
         if ( match(lines[i], "<span class=\"fromTo\">Por:</span>") != null ) {
           int b = lines[i].indexOf("class=\"value\">") + 14;
           String c = lines[i].substring(b, lines[i].indexOf("</span>", lines[i].length() - 10) );
-          out2put.print(trim(c));
-          if (!c.equals("")) {
-            out2put.println();
+          lineCrawl += trim(c); 
+          if ( lines[i-5].indexOf("De:") != -1) {
+            lineCrawl += "," + lines[i-5].substring(lines[i-5].indexOf("\"value\">") + 8, lines[i-5].indexOf("</span>", lines[i-5].length()-10));
           }
+          out2put.println(lineCrawl);
+          lineCrawl = "";
         }
       }
     }

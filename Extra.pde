@@ -1,6 +1,6 @@
 void Extra() {
   counterTempoExtra = millis();
-  
+
   String input[] = loadStrings("links_Extra.txt");
   fim = input.length;
   comeco = 0;
@@ -81,6 +81,9 @@ void Extra() {
           int b = lines[i].indexOf("</em><strong>");
           String c = lines[i].substring(b + 13, lines[i].indexOf("</strong></span>"));
           out2put.print(trim(c));
+          if ( lines[i].indexOf("priceCuted") != -1 ) {
+            out2put.print("," + trim(lines[i].substring(lines[i].indexOf("class=\"priceCuted\">R$ ") + 22, lines[i].indexOf("</span></span><span class="))));
+          }
           // println(c);
           if (!c.equals("")) {
             out2put.println();
