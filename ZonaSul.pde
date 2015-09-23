@@ -156,14 +156,20 @@ void BD_ZonaSul() {
             input2[i] = input2[i].substring(0, input2[i].indexOf(",")) + "." + input2[i].substring(input2[i].indexOf(",") + 1, input2[i].length());
           }
           prod.name = input2[i].substring(0, input2[i].indexOf(",")).toLowerCase(); // separa nome do produto
-          prod.price = properFloat(input2[i].substring(input2[i].indexOf(",") + 1, input2[i].length())); //retira o nome do input e sobra o preco
-
+          input2[i] = input2[i].substring(input2[i].indexOf(",") + 1, input2[i].length()); //retira o nome do input
+          if ( input2[i].indexOf(",", input2[i].indexOf(",") + 1) != -1 ) {
+            println("achou");
+            prod.price = properFloat(input2[i].substring(0, input2[i].indexOf(",", input2[i].indexOf(",") + 1))); //retira o nome do input e sobra o preco
+            prod.deprice = properFloat(input2[i].substring( str(prod.price).length(), input2[i].length()));
+          } else {
+            prod.price = properFloat(input2[i].substring(0, input2[i].length())); //retira o nome do input e sobra o preco
+          }
           pgsql.query( "INSERT INTO product(name,created_at) SELECT '" + prod.name + "',current_timestamp WHERE NOT EXISTS (SELECT name FROM product WHERE name = '" + prod.name + "') RETURNING id;" );
           if ( pgsql.next() )
           {
             pgsql.query( "CREATE VIEW prod_ID_" + pgsql.getInt(1) + " AS SELECT * FROM register WHERE id_product = " + pgsql.getInt(1) + "; ");
           }
-          pgsql.query( "INSERT INTO register(id_product,id_category,id_market,price,datedate,created_at,imagelink) VALUES((SELECT id FROM product WHERE name = '" + prod.name + "'),(SELECT id FROM category WHERE name = '" + prod.category + "'),1," + prod.price + ",current_date,current_timestamp,'" + prod.imageLink + "');" );
+          pgsql.query( "INSERT INTO register(id_product,id_category,id_market,price,deprice,datedate,created_at,imagelink) VALUES((SELECT id FROM product WHERE name = '" + prod.name + "'),(SELECT id FROM category WHERE name = '" + prod.category + "'),1," + prod.price + "," + prod.deprice + ",current_date,current_timestamp,'" + prod.imageLink + "');" );
           counterProdutosBancoZS++;
         }
         println("line: " + i + " \t" + prod.name);

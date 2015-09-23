@@ -143,6 +143,7 @@ String substituiCharNaString(String a, char c1, char c2) {
 class info {
   String imageLink = "";
   float  price = 0.0;
+  float  deprice = 0.0;
   String name = "";
   String date = "";
   String category = "";
@@ -152,6 +153,7 @@ class info {
   void renew() {
     imageLink = "";
     price = 0.0;
+    deprice = 0.0;
     name = "";
     date = "";
     category = "";
