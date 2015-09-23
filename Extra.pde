@@ -174,7 +174,7 @@ void BD_Extra() {
         }
         println("line: " + i + " \t" + prod.name);
       }
-      wait(20);
+      wait(waitDB);
     }
     println("Inserir no Banco do Extra: ACABOU");
     log.println("Inserir no Banco do Extra: ACABOU");

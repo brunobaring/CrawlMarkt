@@ -162,7 +162,7 @@ void BD_PaoDeAcucar() {
         }
         println("line: " + i + " \t" + prod.name);
       }
-      wait(20);
+      wait(waitDB);
     }
     println("Inserir no Banco do Pao de Acucar: ACABOU");
     log.println("Inserir no Banco do Pao de Acucar: ACABOU");
