@@ -47,7 +47,7 @@ void PaoDeAcucar() {
           int c = lines[i].indexOf("\" class=\"prdImagem img\"");
           if (b != -1 && c != -1) {
             String d = lines[i].substring(b, c);
-            out2put.print(d + ",");
+            out2put.print(trim(d) + ",");
           }
         }
 
@@ -69,13 +69,16 @@ void PaoDeAcucar() {
           }
 
           counterProdutosCrawlGPA++;
-          out2put.print(c.toLowerCase() + ",");
+          out2put.print(trim(c).toLowerCase() + ",");
         }
         //PRECO
         if ( match(lines[i], "<span class=\"fromTo\">Por:</span>") != null ) {
           int b = lines[i].indexOf("class=\"value\">") + 14;
           String c = lines[i].substring(b, lines[i].indexOf("</span>", lines[i].length() - 10) );
-          out2put.print(c);
+          out2put.print(trim(c));
+          if (!c.equals("")) {
+            out2put.println();
+          }
         }
       }
     }

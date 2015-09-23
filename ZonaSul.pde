@@ -46,7 +46,7 @@ void ZonaSul() {
           int c = lines[i].indexOf("imgSrc160=\"");
           if (b != -1 && c != -1) {
             String d = lines[i].substring(b + 59, c - 2);
-            out2put.print(d + ",");
+            out2put.print(trim(d) + ",");
           }
         }
 
@@ -75,7 +75,7 @@ void ZonaSul() {
           }
 
           counterProdutosCrawlZS++;
-          out2put.print(d.toLowerCase() + ",");
+          out2put.print(trim(d).toLowerCase() + ",");
         }
         //PRECO
         if ( match(lines[i], "\"preco\"") != null && match(lines[i-2], "AreaLateral") == null) {
@@ -88,7 +88,7 @@ void ZonaSul() {
         } else if ( match(lines[i], "\"preco_por") != null ) {
           int b = lines[i+2].indexOf("R$ ");
           String c = lines[i+2].substring(b + 3, lines[i+2].indexOf(",", b) + 3);
-          out2put.print(c);
+          out2put.print(trim(c));
           if (!c.equals("")) {
             out2put.println();
           }

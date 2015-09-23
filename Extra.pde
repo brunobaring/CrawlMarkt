@@ -50,7 +50,7 @@ void Extra() {
           int c = lines[i].indexOf("\" class=");
           if (b != -1 && c != -1) {
             String d = lines[i].substring(b + 5 + 4, c);
-            out2put.print(d + ",");
+            out2put.print(trim(d) + ",");
             // println(d);
           }
         }
@@ -72,7 +72,7 @@ void Extra() {
           }
 
           counterProdutosCrawlExtra++;
-          out2put.print(d.toLowerCase() + ",");
+          out2put.print(trim(d).toLowerCase() + ",");
           // println(d);
         }
         //PRECO
@@ -80,7 +80,7 @@ void Extra() {
           // println(lines[i]);
           int b = lines[i].indexOf("</em><strong>");
           String c = lines[i].substring(b + 13, lines[i].indexOf("</strong></span>"));
-          out2put.print(c);
+          out2put.print(trim(c));
           // println(c);
           if (!c.equals("")) {
             out2put.println();
