@@ -2,9 +2,10 @@ void PaoDeAcucar() {
   counterTempoGPA = millis();
 
   String input[] = loadStrings("links_GPA.txt");
+  if ( fim == 0 ) {
   fim = input.length;
-  comeco = 0;
-  // fim = 1;
+  }  comeco = 0;
+  // fim = 5;
   // comeco = 194;
 
 
@@ -16,11 +17,14 @@ void PaoDeAcucar() {
     int qtyPages = 1;
     String partialAddress = input[k].substring(0, input[k].indexOf(",")) + "?qt=36&p=";
     String category = input[k].substring(input[k].indexOf("/", 43) + 1, input[k].indexOf(",")).toLowerCase();
-    print("_/,,/  : " + k + "/" + fim + " - " + category);
-    log.print("_/,,/  : " + k + "/" + fim + " - " + category);
+    println("_/,,/  : " + k + "/" + fim + " - " + category);
+    log.println("_/,,/  : " + k + "/" + fim + " - " + category);
 
     out2put.println();
     out2put.print(category);
+    println();
+    print(category);
+    
     for ( int j = 0; j <= qtyPages; j++ ) {
       print(" =>  pag " + j + " ...  ");
       log.print(" =>  pag " + j + " ...  ");
@@ -42,8 +46,8 @@ void PaoDeAcucar() {
         }
         //LINK DA FOTO
         if ( match(lines[i], "class=\"prdImagem img\">") != null) {
-          out2put.println();
-          //          println(lines[i]);
+          // out2put.println();
+                   // println();
           int b = lines[i].indexOf("src=\"/img/uploads/1") + 19;
           int c = lines[i].indexOf("\" class=\"prdImagem img\"");
           if (b != -1 && c != -1) {
@@ -73,14 +77,17 @@ void PaoDeAcucar() {
           lineCrawl += trim(c).toLowerCase() + ",";
         }
         //PRECO
-        if ( match(lines[i], "<span class=\"fromTo\">Por:</span>") != null ) {
+
+
+        if ( match(lines[i], "<span class=\"fromTo\">Por:</span>") != null) {
           int b = lines[i].indexOf("class=\"value\">") + 14;
           String c = lines[i].substring(b, lines[i].indexOf("</span>", lines[i].length() - 10) );
           lineCrawl += trim(c); 
           if ( lines[i-5].indexOf("De:") != -1) {
-            lineCrawl += "," + lines[i-5].substring(lines[i-5].indexOf("\"value\">") + 8, lines[i-5].indexOf("</span>", lines[i-5].length()-10));
+            lineCrawl += "," + lines[i-5].substring(lines[i-5].indexOf("\"value\">") + 8, lines[i-5].indexOf("</span>", lines[i-5].length()-10) );
           }
-          out2put.print(lineCrawl);
+          // print("\n" + lineCrawl);
+          out2put.print("\n" + lineCrawl);
           lineCrawl = "";
         }
       }

@@ -2,7 +2,9 @@ void ZonaSul() {
   counterTempoZS = millis();
 
   String input[] = loadStrings("links_ZS.txt");
-  fim = input.length;
+  if ( fim == 0 ) {
+    fim = input.length;
+  }  
   comeco = 0;
   // fim = 1;
   // comeco = 160;
