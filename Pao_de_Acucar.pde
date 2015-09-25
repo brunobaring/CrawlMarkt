@@ -145,7 +145,7 @@ void BD_PaoDeAcucar() {
     for ( int i = 0; i < input2.length; i++ ) { 
       if ( !input2[i].equals("") ) {        
         prod.renew();
-        if ( input2[i].indexOf(",") == -1) {
+        if ( input2[i].indexOf(",") == -1 ) {
           category = input2[i].toLowerCase();
           pgsql.query( "INSERT INTO category(name, created_at) SELECT '" + category + "',current_timestamp WHERE NOT EXISTS (SELECT name FROM category where name = '" + category + "');" );
         } else if ( !input2[i].equals("") ) {        
@@ -165,12 +165,11 @@ void BD_PaoDeAcucar() {
             prod.price = properFloat(input2[i].substring(0, input2[i].length())); //retira o nome do input e sobra o preco
           }
           pgsql.query( "INSERT INTO product(name,created_at) SELECT '" + prod.name + "',current_timestamp WHERE NOT EXISTS (SELECT name FROM product WHERE name = '" + prod.name + "') RETURNING id;" );
-          pgsql.query( "INSERT INTO product(name,created_at) SELECT '" + prod.name + "',current_timestamp WHERE NOT EXISTS (SELECT name FROM product WHERE name = '" + prod.name + "') RETURNING id;" );
           if ( pgsql.next() )
           {
             pgsql.query( "CREATE VIEW prod_ID_" + pgsql.getInt(1) + " AS SELECT * FROM register WHERE id_product = " + pgsql.getInt(1) + "; ");
           }
-          pgsql.query( "INSERT INTO register(id_product,id_category,id_market,price,datedate,created_at,imagelink) VALUES((SELECT id FROM product WHERE name = '" + prod.name + "'),(SELECT id FROM category WHERE name = '" + prod.category + "'),2," + prod.price + ",current_date,current_timestamp,'" + prod.imageLink + "');" );
+          pgsql.query( "INSERT INTO register(id_product,id_category,id_market,price,deprice,datedate,created_at,imagelink) VALUES((SELECT id FROM product WHERE name = '" + prod.name + "'),(SELECT id FROM category WHERE name = '" + prod.category + "'),2," + prod.price + "," + prod.deprice + ",current_date,current_timestamp,'" + prod.imageLink + "');" );
           counterProdutosBancoGPA++;
         }
         println("line: " + i + " \t" + prod.name);
