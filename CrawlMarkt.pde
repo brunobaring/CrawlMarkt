@@ -17,8 +17,8 @@ int comeco, fim, wait, waitDB, waitBottom, waitTop = 0;
 boolean sendEmail = false;
 String dia, mes, ano = "";
 String refreshtoken = "";
-// String settingsPath = "/usr/share/nginx/html/Markt/Settings.txt";
-String settingsPath = "/Users/brunobaring/Desktop/Markt/Settings.txt";
+String settingsPath = "/usr/share/nginx/html/Markt/Settings.txt";
+// String settingsPath = "/Users/brunobaring/Desktop/Markt/Settings.txt";
 
 
 // ya29.7wGs9MdHlfFKgYJkeBLCw9R-DDDE9zuxV7FYo3qvtFoAIivuPpAPgvT6MFJ0XiReo44e

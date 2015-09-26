@@ -2,9 +2,8 @@ void PaoDeAcucar() {
   counterTempoGPA = millis();
 
   String input[] = loadStrings("links_GPA.txt");
-  if ( fim == 0 ) {
   fim = input.length;
-  }  comeco = 0;
+  comeco = 0;
   // fim = 5;
   // comeco = 194;
 
@@ -24,7 +23,7 @@ void PaoDeAcucar() {
     out2put.print(category);
     println();
     print(category);
-    
+
     for ( int j = 0; j <= qtyPages; j++ ) {
       print(" =>  pag " + j + " ...  ");
       log.print(" =>  pag " + j + " ...  ");
@@ -47,7 +46,7 @@ void PaoDeAcucar() {
         //LINK DA FOTO
         if ( match(lines[i], "class=\"prdImagem img\">") != null) {
           // out2put.println();
-                   // println();
+          // println();
           int b = lines[i].indexOf("src=\"/img/uploads/1") + 19;
           int c = lines[i].indexOf("\" class=\"prdImagem img\"");
           if (b != -1 && c != -1) {
