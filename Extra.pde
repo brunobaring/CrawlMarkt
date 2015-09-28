@@ -2,6 +2,8 @@ void Extra() {
   counterTempoExtra = millis();
 
   String input[] = loadStrings("links_Extra.txt");
+
+
   fim = input.length;
   comeco = 0;
   // fim = 1;
@@ -36,7 +38,25 @@ void Extra() {
         fullAddress = partialAddress + (j-1)*36;
       }
 
-      lines = loadStrings(fullAddress);
+
+
+
+
+      try {
+        lines = loadStrings(fullAddress);
+      }
+      catch (Exception e) {
+        println("deu aquela treta Exception");
+        log.println("deu aquela treta Exception");
+        log.flush();
+        log.close();
+        log = null;
+        log = createWriter(path + dia + ":" + mes + ":" + ano + "/_LOGEXTRA" + random(1,200) + "_" + dia + ":" + mes + ":" + ano + ".txt");
+        wait(20 * 60 * 1000);    
+        lines = loadStrings(fullAddress);
+        e.printStackTrace();
+      }
+
 
       for ( int i = 0; i < lines.length; i++) {
 
@@ -146,6 +166,7 @@ void BD_Extra() {
     log.println("Inserir no Banco do Extra: COMECOU");
     String category = "";
     for ( int i = 0; i < input2.length; i++ ) {
+      // try { 
       if ( !input2[i].equals("") ) {
         prod.renew();
         if ( input2[i].indexOf(",") == -1 ) {
@@ -177,6 +198,13 @@ void BD_Extra() {
         }
         println("line: " + i + " \t" + prod.name);
       }
+      // }
+      // catch(Exception e) {
+      //   println("Exception no BANCO EXTRA. Esperar " + waitExceptionDB + " minutos.");
+      //   log.println("Exception no BANCO EXTRA. Esperar " + waitExceptionDB + " minutos.");
+      //   wait(waitExceptionDB);
+      //   i--;
+      // }
       wait(waitDB);
     }
     println("Inserir no Banco do Extra: ACABOU");

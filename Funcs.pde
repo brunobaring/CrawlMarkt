@@ -33,6 +33,8 @@ void inita() {
       waitBottom = Integer.parseInt(action);    
     if ( market.equals("waitTop") )
       waitTop = Integer.parseInt(action);
+    if ( market.equals("waitExceptionDB") )
+      waitExceptionDB = Integer.parseInt(action);
     if ( market.equals("dropDB") && action.indexOf("y") != -1 )
       dropDB();
     if ( market.equals("ZonaSul") && action.indexOf("c") != -1 )
